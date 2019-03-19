@@ -15,7 +15,7 @@ do
         else
                 errCode=0
                 result=`echo $((( $(date +%s) - $(stat -c %Y $file)) / 3600 ))`
-                if [ $result > 48 ] ; then
+                if [ $result -gt 48 ] ; then
                         errCode=3
                 fi
         fi
