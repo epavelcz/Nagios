@@ -15,6 +15,9 @@ do
         else
                 errCode=0
                 result=`echo $((( $(date +%s) - $(stat -c %Y $file)) / 3600 ))`
+                if [ $result > 48 ] ; then
+                        errCode=3
+                fi
         fi
 
 done
@@ -34,6 +37,10 @@ case "$errCode" in
         2)
                 echo $result
                 exit 2
+        ;;
+        3)
+                echo "WARNING - Backup log age older than 48 hours ("$result "hours)"
+                exit 1
         ;;
 
 esac
